@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.32" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 100 30 L 121.4 82.2 L 177.6 86.3 L 134.4 122.8 L 148.5 177.5 L 100 147.5 L 51.5 177.5 L 65.6 122.8 L 22.4 86.3 L 78.6 82.2 Z"></path>
+  <circle cx="100" cy="30" r="2.8" fill="currentColor" stroke="none"></circle>
+  <circle cx="177.6" cy="86.3" r="2.8" fill="currentColor" stroke="none"></circle>
+  <circle cx="148.5" cy="177.5" r="2.8" fill="currentColor" stroke="none"></circle>
+  <circle cx="51.5" cy="177.5" r="2.8" fill="currentColor" stroke="none"></circle>
+  <circle cx="22.4" cy="86.3" r="2.8" fill="currentColor" stroke="none"></circle>
+  <circle cx="100" cy="115" r="2" fill="currentColor" stroke="none" opacity="0.6"></circle>
+</svg>

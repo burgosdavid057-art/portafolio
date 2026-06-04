@@ -1,0 +1,133 @@
+<?php
+return [
+    'meta' => [
+        'title'       => 'David Burgos — Portafolio',
+        'description' => 'Portafolio de David Burgos — desarrollador web full-stack en Medellín, Colombia.',
+        'role'        => 'Desarrollador web full-stack',
+    ],
+    'nav' => [
+        'about'    => 'Sobre mí',
+        'skills'   => 'Habilidades',
+        'projects' => 'Proyectos',
+        'contact'  => 'Contacto',
+    ],
+    'header' => [
+        'cv'         => 'CV',
+        'cv_aria'    => 'Descargar CV en PDF',
+        'lang_aria'  => 'Switch to English',
+        'lang_label' => 'EN',
+        'home_aria'  => 'David Burgos — Inicio',
+    ],
+    'hero' => [
+        'badge'       => 'Disponible para colaborar',
+        'tagline_1'   => 'Desarrollador web full-stack.',
+        'tagline_2'   => 'Construyo experiencias web y aplicaciones.',
+        'cta_work'    => 'Ver mi trabajo',
+        'cta_contact' => 'Contáctame',
+    ],
+    'about' => [
+        'eyebrow'     => '01 — Sobre mí',
+        'headline_1'  => 'Construyo productos digitales completos —',
+        'headline_2'  => 'desde el diseño hasta el deploy.',
+        'p1_html'     => 'Soy <span class="about-strong">David Burgos</span>, desarrollador web full-stack basado en <span class="about-strong">Medellín, Colombia</span>.',
+        'p2'          => 'Me enfoco en construir sitios y aplicaciones que se sientan rápidos y cuidados. Trabajo el stack completo: PHP, JavaScript, Tailwind, MySQL, y herramientas modernas como React y Next.',
+        'p3'          => 'Tengo tres sitios en producción y varios desarrollos en curso — siempre aprendiendo nuevas tecnologías y refinando el oficio.',
+        'stats' => [
+            'sites'   => 'Sitios en producción',
+            'tech'    => 'Tecnologías',
+            'year'    => 'Año actual',
+            'coffees' => 'Cafés',
+        ],
+        'globe_caption' => 'Colombia · España',
+    ],
+    'skills' => [
+        'title'       => 'Habilidades',
+        'subtitle'    => 'Tecnologías con las que construyo día a día.',
+        'stack_label' => 'Stack que uso',
+        'drag_hint'   => 'Arrastra para rotar',
+    ],
+    'projects' => [
+        'title'       => 'Proyectos',
+        'subtitle'    => 'Lo que he construido y lo que está en camino. Arrastra o usa las flechas para navegar.',
+        'status_prod' => 'En producción',
+        'status_dev'  => 'En desarrollo',
+        'btn_visit'   => 'Visitar sitio',
+        'btn_copy'    => 'Copiar URL',
+        'btn_soon'    => 'Próximamente',
+        'aria_prev'   => 'Anterior',
+        'aria_next'   => 'Siguiente',
+        'aria_dot'    => 'Ir al proyecto',
+        'list' => [
+            [
+                'description' => 'Tienda en línea de suplementos especializados para equinos. Catálogo, carrito y experiencia de compra.',
+                'tag'         => 'E-commerce',
+            ],
+            [
+                'description' => 'Sitio web corporativo para una agencia de modelaje. Diseño visual, secciones de portafolio y contacto.',
+                'tag'         => 'Sitio corporativo',
+            ],
+            [
+                'description' => 'Sitio web para empresa colombiana de catering y planificación de eventos: mesas de sushi, chef privado, bodas y eventos corporativos.',
+                'tag'         => 'Catering · Eventos',
+            ],
+            [
+                'description' => 'Varios desarrollos en proceso: aplicaciones móviles, herramientas internas y proyectos personales en construcción.',
+                'tag'         => 'Multi-stack',
+                'title'       => 'Aplicaciones en desarrollo',
+            ],
+        ],
+    ],
+    'process' => [
+        'title'           => 'Cómo trabajo',
+        'subtitle'        => 'Del brief al deploy en 5 pasos. No solo escribo código — acompaño el proyecto de principio a fin.',
+        'center_eyebrow'  => 'El proceso',
+        'center_title'    => '5 pasos',
+        'center_foot'     => 'brief → soporte',
+        'aria_label'      => 'Pasos del proceso',
+        'steps' => [
+            ['title' => 'Brief',   'desc' => 'Te escucho. Entiendo qué necesitas, para quién, y cuáles son las restricciones. Brief escrito, no asumido.'],
+            ['title' => 'Diseño',  'desc' => 'Wireframes y prototipo navegable antes de codear. Validamos UX y dirección visual a tiempo.'],
+            ['title' => 'Build',   'desc' => 'Frontend, backend, base de datos e integraciones. PHP, MySQL y JS limpio y mantenible.'],
+            ['title' => 'Deploy',  'desc' => 'Configuro hosting, dominio, SSL, performance. Salida a producción sin sobresaltos.'],
+            ['title' => 'Soporte', 'desc' => 'Primer mes incluido. Después, mantenimiento por contrato o consultas puntuales sin compromiso.'],
+        ],
+    ],
+    'testimonials' => [
+        'title'    => 'Lo que dicen los clientes',
+        'subtitle' => 'Proyectos entregados, confianza ganada. Sigue bajando para ver cada testimonio.',
+        'aria'     => 'Navegación de testimonios',
+        'aria_dot' => 'Ver testimonio',
+        'list' => [
+            [
+                'role'  => 'Suplementos Equinos GM · Fundador',
+                'quote' => 'David convirtió una idea suelta en un e-commerce funcional en pocas semanas. Tiempos de carga rápidos, panel de admin claro y nos dejó capacitados para gestionarlo nosotros mismos.',
+                'tags'  => [['text' => 'DESTACADO', 'type' => 'featured'], ['text' => 'E-commerce', 'type' => 'default']],
+                'stats' => ['6 semanas', 'En producción'],
+            ],
+            [
+                'role'  => 'StarModel · Dirección',
+                'quote' => 'Queríamos un sitio que reflejara la estética de la agencia. David entendió la marca a la primera y entregó algo limpio, rápido y responsive. Comunicación clara durante todo el proceso.',
+                'tags'  => [['text' => 'Sitio corporativo', 'type' => 'default'], ['text' => 'Diseño', 'type' => 'default']],
+                'stats' => ['Diseño a medida', 'En producción'],
+            ],
+            [
+                'role'  => 'Tommzon · Co-fundador',
+                'quote' => 'Atento, propositivo y entrega rápido. Iteramos varias versiones del sitio y siempre tuvo paciencia con los cambios. El resultado se ve premium — justo lo que buscábamos para eventos corporativos.',
+                'tags'  => [['text' => 'Catering · Eventos', 'type' => 'default'], ['text' => 'Iteración rápida', 'type' => 'default']],
+                'stats' => ['Setup veloz', 'Recomendado'],
+            ],
+        ],
+    ],
+    'contact' => [
+        'eyebrow'     => '04 — Contacto',
+        'headline_1'  => 'Hablemos.',
+        'headline_2'  => 'Construyamos algo juntos.',
+        'tagline'     => '¿Tienes una idea, un proyecto o una colaboración en mente? Escríbeme y empecemos.',
+        'btn_copy'    => 'Copiar número',
+        'footnote'    => 'Respondo dentro de 24h · Medellín, Colombia',
+        'wa_message'  => 'Hola David, vi tu portafolio y quiero hablarte sobre un proyecto.',
+    ],
+    'footer' => [
+        'made_with' => 'Hecho con PHP + Tailwind.',
+    ],
+];

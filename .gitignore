@@ -1,0 +1,21 @@
+# Database
+*.sqlite
+*.sqlite-journal
+admin/data/
+
+# Secrets
+.env
+*.pem
+*.key
+
+# Backups
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/

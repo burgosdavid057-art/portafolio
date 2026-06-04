@@ -1,0 +1,133 @@
+<?php
+return [
+    'meta' => [
+        'title'       => 'David Burgos — Portfolio',
+        'description' => 'Portfolio of David Burgos — full-stack web developer in Medellín, Colombia.',
+        'role'        => 'Full-stack web developer',
+    ],
+    'nav' => [
+        'about'    => 'About',
+        'skills'   => 'Skills',
+        'projects' => 'Projects',
+        'contact'  => 'Contact',
+    ],
+    'header' => [
+        'cv'         => 'CV',
+        'cv_aria'    => 'Download CV as PDF',
+        'lang_aria'  => 'Cambiar a español',
+        'lang_label' => 'ES',
+        'home_aria'  => 'David Burgos — Home',
+    ],
+    'hero' => [
+        'badge'       => 'Available for collaboration',
+        'tagline_1'   => 'Full-stack web developer.',
+        'tagline_2'   => 'I build web experiences and applications.',
+        'cta_work'    => 'See my work',
+        'cta_contact' => 'Contact me',
+    ],
+    'about' => [
+        'eyebrow'     => '01 — About me',
+        'headline_1'  => 'I build complete digital products —',
+        'headline_2'  => 'from design to deployment.',
+        'p1_html'     => 'I\'m <span class="about-strong">David Burgos</span>, a full-stack web developer based in <span class="about-strong">Medellín, Colombia</span>.',
+        'p2'          => 'I focus on building sites and applications that feel fast and crafted. I work the full stack: PHP, JavaScript, Tailwind, MySQL, and modern tools like React and Next.',
+        'p3'          => 'Three sites in production and several builds in flight — always learning new technologies and refining the craft.',
+        'stats' => [
+            'sites'   => 'Sites in production',
+            'tech'    => 'Technologies',
+            'year'    => 'Current year',
+            'coffees' => 'Coffees',
+        ],
+        'globe_caption' => 'Colombia · Spain',
+    ],
+    'skills' => [
+        'title'       => 'Skills',
+        'subtitle'    => 'Technologies I build with every day.',
+        'stack_label' => 'Stack I use',
+        'drag_hint'   => 'Drag to rotate',
+    ],
+    'projects' => [
+        'title'       => 'Projects',
+        'subtitle'    => 'What I\'ve built and what\'s on the way. Drag or use the arrows to navigate.',
+        'status_prod' => 'Live',
+        'status_dev'  => 'In progress',
+        'btn_visit'   => 'Visit site',
+        'btn_copy'    => 'Copy URL',
+        'btn_soon'    => 'Coming soon',
+        'aria_prev'   => 'Previous',
+        'aria_next'   => 'Next',
+        'aria_dot'    => 'Go to project',
+        'list' => [
+            [
+                'description' => 'Online store of equine supplements. Catalog, cart and full purchase experience.',
+                'tag'         => 'E-commerce',
+            ],
+            [
+                'description' => 'Corporate site for a modeling agency. Visual design, portfolio sections and contact.',
+                'tag'         => 'Corporate site',
+            ],
+            [
+                'description' => 'Site for a Colombian catering & event-planning company: sushi tables, private chef, weddings and corporate events.',
+                'tag'         => 'Catering · Events',
+            ],
+            [
+                'description' => 'Several builds in progress: mobile apps, internal tools and personal projects under construction.',
+                'tag'         => 'Multi-stack',
+                'title'       => 'Apps in development',
+            ],
+        ],
+    ],
+    'process' => [
+        'title'           => 'How I work',
+        'subtitle'        => 'From brief to deploy in 5 steps. I don\'t just write code — I see the project through end-to-end.',
+        'center_eyebrow'  => 'The process',
+        'center_title'    => '5 steps',
+        'center_foot'     => 'brief → support',
+        'aria_label'      => 'Process steps',
+        'steps' => [
+            ['title' => 'Brief',   'desc' => 'I listen. I understand what you need, who it\'s for, and the constraints. Brief written down, never assumed.'],
+            ['title' => 'Design',  'desc' => 'Wireframes and a clickable prototype before any code. We validate UX and visual direction early.'],
+            ['title' => 'Build',   'desc' => 'Frontend, backend, database and integrations. Clean, maintainable PHP, MySQL and JS.'],
+            ['title' => 'Deploy',  'desc' => 'Hosting, domain, SSL, performance — all set up. Smooth go-live, no surprises.'],
+            ['title' => 'Support', 'desc' => 'First month included. After that, maintenance contracts or one-off consultations as needed.'],
+        ],
+    ],
+    'testimonials' => [
+        'title'    => 'What clients say',
+        'subtitle' => 'Projects delivered, trust earned. Keep scrolling to see each testimonial.',
+        'aria'     => 'Testimonials navigation',
+        'aria_dot' => 'View testimonial',
+        'list' => [
+            [
+                'role'  => 'Suplementos Equinos GM · Founder',
+                'quote' => 'David turned a loose idea into a working e-commerce in just a few weeks. Fast load times, a clear admin panel, and he left us trained to run it ourselves.',
+                'tags'  => [['text' => 'FEATURED', 'type' => 'featured'], ['text' => 'E-commerce', 'type' => 'default']],
+                'stats' => ['6 weeks', 'Live'],
+            ],
+            [
+                'role'  => 'StarModel · Direction',
+                'quote' => 'We wanted a site that reflected the agency\'s aesthetic. David got the brand on the first try and delivered something clean, fast and responsive. Clear communication throughout.',
+                'tags'  => [['text' => 'Corporate site', 'type' => 'default'], ['text' => 'Design', 'type' => 'default']],
+                'stats' => ['Custom design', 'Live'],
+            ],
+            [
+                'role'  => 'Tommzon · Co-founder',
+                'quote' => 'Attentive, proactive and delivers fast. We iterated through several versions of the site and he was patient with every change. The result feels premium — exactly what we wanted for corporate events.',
+                'tags'  => [['text' => 'Catering · Events', 'type' => 'default'], ['text' => 'Fast iteration', 'type' => 'default']],
+                'stats' => ['Quick setup', 'Recommended'],
+            ],
+        ],
+    ],
+    'contact' => [
+        'eyebrow'     => '04 — Contact',
+        'headline_1'  => 'Let\'s talk.',
+        'headline_2'  => 'Let\'s build something together.',
+        'tagline'     => 'Got an idea, a project or a collaboration in mind? Send me a message and let\'s start.',
+        'btn_copy'    => 'Copy number',
+        'footnote'    => 'I respond within 24h · Medellín, Colombia',
+        'wa_message'  => 'Hi David, I saw your portfolio and want to talk to you about a project.',
+    ],
+    'footer' => [
+        'made_with' => 'Built with PHP + Tailwind.',
+    ],
+];

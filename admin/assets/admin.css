@@ -1,0 +1,340 @@
+/* ===== Admin CSS — pairs with the compiled Tailwind utilities ===== */
+
+:root {
+    --a-bg:         #0a0a10;
+    --a-panel:      #11121a;
+    --a-panel-2:    #161824;
+    --a-border:     #232636;
+    --a-border-2:   #2a2e42;
+    --a-text:       #e2e8f0;
+    --a-muted:      #94a3b8;
+    --a-accent:     #818cf8;
+    --a-accent-2:   #c084fc;
+}
+
+body { background: var(--a-bg); color: var(--a-text); }
+
+/* ===== Sidebar / topbar ===== */
+.admin-sidebar {
+    width: 14rem;
+    flex-shrink: 0;
+    background: var(--a-panel);
+    border-right: 1px solid var(--a-border);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+.admin-topbar {
+    border-bottom: 1px solid var(--a-border);
+    background: rgba(17, 18, 26, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.admin-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 0.5rem;
+    color: #cbd5e1;
+    font-size: 0.875rem;
+    border: 1px solid transparent;
+}
+.admin-nav-link:hover {
+    background: var(--a-panel-2);
+    color: #fff;
+}
+.admin-nav-link.is-active {
+    background: var(--a-panel-2);
+    color: #fff;
+    border-color: var(--a-border-2);
+}
+
+@media (max-width: 768px) {
+    .admin-sidebar {
+        position: fixed; left: -100%; transition: left 0.25s ease;
+        height: 100vh; z-index: 30;
+    }
+    .admin-sidebar.is-open { left: 0; }
+}
+
+/* ===== Cards / inputs / buttons ===== */
+.admin-card {
+    background: var(--a-panel);
+    border: 1px solid var(--a-border);
+    border-radius: 0.75rem;
+    padding: 1rem 1.1rem;
+}
+
+.admin-input {
+    width: 100%;
+    background: var(--a-panel-2);
+    border: 1px solid var(--a-border-2);
+    color: var(--a-text);
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.admin-input:focus {
+    border-color: var(--a-accent);
+    box-shadow: 0 0 0 3px rgb(129 140 248 / 0.18);
+}
+.admin-input::placeholder { color: #64748b; }
+
+.admin-btn-primary,
+.admin-btn-ghost,
+.admin-btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.95rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    cursor: pointer;
+}
+.admin-btn-primary {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: #fff;
+}
+.admin-btn-primary:hover { filter: brightness(1.1); }
+.admin-btn-ghost {
+    background: var(--a-panel-2);
+    border-color: var(--a-border-2);
+    color: var(--a-text);
+}
+.admin-btn-ghost:hover { background: #1c1f2e; }
+.admin-btn-danger {
+    background: rgb(244 63 94 / 0.12);
+    border-color: rgb(244 63 94 / 0.35);
+    color: #fb7185;
+}
+.admin-btn-danger:hover { background: rgb(244 63 94 / 0.22); }
+
+/* ===== Chips / flashes ===== */
+.admin-chip {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.35rem;
+    border: 1px solid;
+}
+.admin-chip-active   { color: #34d399; border-color: rgb(52 211 153 / 0.35); background: rgb(52 211 153 / 0.08); }
+.admin-chip-paused   { color: #fbbf24; border-color: rgb(251 191 36 / 0.35); background: rgb(251 191 36 / 0.08); }
+.admin-chip-done     { color: #94a3b8; border-color: rgb(148 163 184 / 0.35); background: rgb(148 163 184 / 0.08); }
+.admin-chip-archived { color: #64748b; border-color: rgb(100 116 139 / 0.35); background: rgb(100 116 139 / 0.08); }
+
+.admin-flash {
+    border-radius: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    border: 1px solid;
+}
+.admin-flash-success { color: #34d399; border-color: rgb(52 211 153 / 0.35); background: rgb(52 211 153 / 0.08); }
+.admin-flash-error   { color: #fb7185; border-color: rgb(244 63 94 / 0.35);  background: rgb(244 63 94 / 0.08); }
+
+/* ===== Project card colors ===== */
+.admin-project-card {
+    display: block;
+    background: var(--a-panel);
+    border: 1px solid var(--a-border);
+    border-radius: 0.75rem;
+    padding: 1rem 1.1rem;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    position: relative;
+    overflow: hidden;
+}
+.admin-project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: currentColor;
+    opacity: 0.55;
+}
+.admin-project-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--a-border-2);
+    background: var(--a-panel-2);
+}
+.admin-color-indigo   { color: #818cf8; }
+.admin-color-emerald  { color: #34d399; }
+.admin-color-amber    { color: #fbbf24; }
+.admin-color-rose     { color: #fb7185; }
+.admin-color-sky      { color: #38bdf8; }
+.admin-color-violet   { color: #a78bfa; }
+.admin-color-fuchsia  { color: #e879f9; }
+.admin-color-cyan     { color: #22d3ee; }
+
+/* ===== Tabs ===== */
+.admin-tab {
+    padding: 0.6rem 0.9rem;
+    color: var(--a-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+.admin-tab:hover { color: #fff; }
+.admin-tab.is-active {
+    color: #fff;
+    border-color: var(--a-accent);
+}
+
+/* ===== Kanban ===== */
+.kanban-board {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+@media (max-width: 1024px) {
+    .kanban-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+    .kanban-board { grid-template-columns: minmax(0, 1fr); }
+}
+
+.kanban-column {
+    background: var(--a-panel);
+    border: 1px solid var(--a-border);
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 18rem;
+}
+.kanban-column-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--a-border);
+}
+.kanban-column-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--a-muted);
+}
+.kanban-column-count {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.45rem;
+    background: var(--a-panel-2);
+    border-radius: 9999px;
+    color: var(--a-muted);
+}
+
+.kanban-tasks {
+    list-style: none;
+    padding: 0.6rem;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-height: 5rem;
+}
+.kanban-tasks.drag-over { background: rgb(129 140 248 / 0.05); }
+
+.kanban-task {
+    background: var(--a-panel-2);
+    border: 1px solid var(--a-border-2);
+    border-left: 3px solid var(--a-muted);
+    border-radius: 0.55rem;
+    padding: 0.65rem 0.8rem;
+    cursor: grab;
+    transition: transform 0.1s ease, box-shadow 0.15s ease;
+}
+.kanban-task:hover { box-shadow: 0 4px 14px -6px rgb(0 0 0 / 0.5); }
+.kanban-task.sortable-ghost { opacity: 0.4; }
+.kanban-task.sortable-chosen { cursor: grabbing; }
+.kanban-task.priority-low    { border-left-color: #64748b; }
+.kanban-task.priority-medium { border-left-color: #818cf8; }
+.kanban-task.priority-high   { border-left-color: #fb7185; }
+
+.kanban-task-title { font-weight: 500; font-size: 0.875rem; line-height: 1.3; }
+.kanban-task-desc  { font-size: 0.75rem; color: var(--a-muted); margin-top: 0.3rem; }
+.kanban-task-meta  {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.55rem;
+}
+.kanban-priority-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background: currentColor;
+    color: var(--a-muted);
+}
+.priority-low    .kanban-priority-dot { color: #64748b; }
+.priority-medium .kanban-priority-dot { color: #818cf8; }
+.priority-high   .kanban-priority-dot { color: #fb7185; }
+
+.kanban-add-btn {
+    margin: 0 0.6rem 0.6rem;
+    padding: 0.45rem;
+    font-size: 0.78rem;
+    color: var(--a-muted);
+    border: 1px dashed var(--a-border-2);
+    border-radius: 0.45rem;
+    background: transparent;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.kanban-add-btn:hover {
+    color: #fff;
+    border-color: var(--a-accent);
+    background: rgb(129 140 248 / 0.06);
+}
+
+/* ===== Modal ===== */
+.admin-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+}
+.admin-modal.hidden { display: none; }
+.admin-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 0.7);
+    cursor: pointer;
+}
+.admin-modal-panel {
+    position: relative;
+    width: 100%;
+    max-width: 28rem;
+    background: var(--a-panel);
+    border: 1px solid var(--a-border-2);
+    border-radius: 0.85rem;
+    padding: 1.25rem 1.35rem;
+    box-shadow: 0 20px 50px -10px rgb(0 0 0 / 0.6);
+}
+
+/* ===== Misc ===== */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

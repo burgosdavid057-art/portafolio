@@ -1,0 +1,8 @@
+# Defensive: deny direct access to lib/ and data files. Only PHP entry points
+# should be reachable. nginx (the primary front) ignores .htaccess — actual data
+# files live OUTSIDE httpdocs/ (see admin/lib/db.php → $DATA_DIR).
+<FilesMatch "\.(sqlite|sqlite-journal|md|log)$">
+    Require all denied
+</FilesMatch>
+RewriteEngine On
+RewriteRule ^lib/ - [F,L]
