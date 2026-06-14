@@ -1,7 +1,7 @@
 <section id="contact" class="contact-section">
-    <!-- Soft fade from the cosmic projects section -->
+    
     <div class="section-bridge section-bridge-top section-bridge-from-dark" aria-hidden="true"></div>
-    <!-- Animated gradient dots background -->
+    
     <div class="gradient-dots" aria-hidden="true"></div>
     <div class="contact-vignette" aria-hidden="true"></div>
 

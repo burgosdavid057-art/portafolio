@@ -16,8 +16,6 @@ if ($id) {
 if (!$project) {
     redirect('/admin/projects.php', 'error', 'Proyecto no encontrado.');
 }
-
-// POST handlers (edit project metadata, delete project)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $action = (string) ($_POST['action'] ?? '');
@@ -47,12 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('/admin/projects.php', 'success', 'Proyecto eliminado.');
     }
 }
-
-// Active tab
 $tab = (string) ($_GET['tab'] ?? 'kanban');
 if (!in_array($tab, ['kanban', 'obs', 'fin', 'docs'], true)) $tab = 'kanban';
-
-// Load tasks grouped by status
 $tasksStmt = $db->prepare(
     'SELECT * FROM tasks WHERE project_id = ? ORDER BY status, position, id'
 );
@@ -61,8 +55,6 @@ $tasksByStatus = ['todo' => [], 'doing' => [], 'review' => [], 'done' => []];
 foreach ($tasksStmt->fetchAll() as $t) {
     $tasksByStatus[$t['status']][] = $t;
 }
-
-// Observations
 $obs = [];
 $financeRows = [];
 $documents = [];
@@ -97,7 +89,7 @@ if ($tab === 'docs') {
 admin_layout_start($project['name'], 'projects');
 ?>
 
-<!-- Project header -->
+
 <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
     <div>
         <div class="flex items-center gap-2 text-xs text-slate-400 mb-1">
@@ -125,7 +117,7 @@ admin_layout_start($project['name'], 'projects');
     </div>
 </div>
 
-<!-- Tabs -->
+
 <nav class="flex gap-1 mt-6 mb-5 border-b border-slate-800/80 -mx-6 px-6">
     <?php
         $tabs = [
@@ -148,7 +140,7 @@ admin_layout_start($project['name'], 'projects');
 </nav>
 
 <?php if ($tab === 'kanban'): ?>
-    <!-- KANBAN BOARD -->
+    
     <div class="kanban-board" data-project-id="<?= $id ?>" data-csrf="<?= e(csrf_token()) ?>">
         <?php foreach (STATUS_ORDER as $col): ?>
             <div class="kanban-column" data-status="<?= e($col) ?>">
@@ -180,7 +172,7 @@ admin_layout_start($project['name'], 'projects');
         <?php endforeach; ?>
     </div>
 
-    <!-- Task modal (create/edit) -->
+    
     <div class="admin-modal hidden" id="modal-task" data-modal="task">
         <div class="admin-modal-backdrop" data-close-modal></div>
         <div class="admin-modal-panel">
@@ -225,7 +217,7 @@ admin_layout_start($project['name'], 'projects');
     </div>
 
 <?php elseif ($tab === 'obs'): ?>
-    <!-- OBSERVATIONS -->
+    
     <form method="post" action="/admin/api.php" class="admin-card space-y-3 mb-6">
         <?= csrf_input() ?>
         <input type="hidden" name="action" value="obs-create">
@@ -269,7 +261,7 @@ admin_layout_start($project['name'], 'projects');
     <?php endif; ?>
 
 <?php elseif ($tab === 'fin'): ?>
-    <!-- FINANCES -->
+    
     <?php $balance = $incomeTotal - $expenseTotal; ?>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div class="admin-card">
@@ -371,7 +363,7 @@ admin_layout_start($project['name'], 'projects');
     <?php endif; ?>
 
 <?php elseif ($tab === 'docs'): ?>
-    <!-- DOCUMENTS -->
+    
     <form method="post" action="/admin/api.php" enctype="multipart/form-data" class="admin-card mb-6">
         <?= csrf_input() ?>
         <input type="hidden" name="action" value="doc-upload">
@@ -429,7 +421,7 @@ admin_layout_start($project['name'], 'projects');
     <?php endif; ?>
 <?php endif; ?>
 
-<!-- Edit project modal -->
+
 <div class="admin-modal hidden" id="modal-edit-project" data-modal="edit-project">
     <div class="admin-modal-backdrop" data-close-modal></div>
     <div class="admin-modal-panel">

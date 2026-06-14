@@ -1,13 +1,5 @@
 <?php
-/**
- * Testimonials — stack swiper.
- *
- * The $testimonials array is defined in index.php.
- *
- *   ⚠ TODO: replace the placeholder quotes with REAL quotes from
- *   suplementosequinosgm.co / starmodel.com.co / tommzon.com clients
- *   before sharing this site with prospects.
- */
+
 $render_stat_icon = function (string $name): string {
     switch ($name) {
         case 'clock':
@@ -25,16 +17,15 @@ $render_stat_icon = function (string $name): string {
 };
 ?>
 <section id="testimonials" class="testimonials-section">
-    <!-- Soft fade-in from the dark projects section above -->
+    
     <div class="section-bridge section-bridge-top section-bridge-from-dark" aria-hidden="true"></div>
 
-    <!-- Tall scroll container — height grows with the number of testimonials so the
-         user "spends" one viewport of scroll per testimonial while the inner pin stays. -->
+    
     <div class="testimonials-scroll-container"
          data-testimonial-scroll
          style="--testimonial-count: <?= count($testimonials) ?>;">
 
-        <!-- Pinned viewport-height wrapper -->
+        
         <div class="testimonials-sticky">
 
             <div class="testimonials-inner">
@@ -48,7 +39,7 @@ $render_stat_icon = function (string $name): string {
                 </div>
 
                 <div class="testimonial-stack" data-testimonial-stack>
-            <?php foreach ($testimonials as $i => $tm): /* $tm to avoid shadowing the global $t (translations) */ ?>
+            <?php foreach ($testimonials as $i => $tm):  ?>
                 <article class="testimonial-card" data-index="<?= $i ?>" aria-roledescription="testimonial">
                     <div class="testimonial-head">
                         <div class="testimonial-avatar" style="background: <?= htmlspecialchars($tm['avatar_gradient']) ?>;">

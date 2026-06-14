@@ -46,7 +46,6 @@
             </a>
 
             <?php
-                // Cache-bust the CV by its mtime so a re-uploaded PDF is fetched fresh.
                 $cv_abs = __DIR__ . '/../' . $cv_path;
                 $cv_href = $cv_path . (is_file($cv_abs) ? '?v=' . filemtime($cv_abs) : '');
             ?>
@@ -65,7 +64,7 @@
 
     </div>
 
-    <!-- Scroll progress bar -->
+    
     <div class="header-progress" aria-hidden="true">
         <div class="header-progress-bar" id="header-progress-bar"></div>
     </div>

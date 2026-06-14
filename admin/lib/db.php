@@ -1,21 +1,8 @@
 <?php
-/**
- * SQLite connection + schema bootstrap.
- *
- * The DB file and uploads live OUTSIDE httpdocs/ — at the user's home,
- * one level above the web root — so they're never directly downloadable.
- *
- *   /var/www/vhosts/davidburgos.dev/
- *   ├── httpdocs/
- *   │   └── admin/  ← code
- *   └── admin-data/ ← created on first run
- *       ├── admin.sqlite
- *       └── uploads/<project_id>/<file>
- */
+
 declare(strict_types=1);
 
 function admin_data_dir(): string {
-    // From admin/lib/db.php: dirname(__DIR__, 3) = home dir (above httpdocs/).
     $dir = dirname(__DIR__, 3) . '/admin-data';
     if (!is_dir($dir)) {
         @mkdir($dir, 0750, true);

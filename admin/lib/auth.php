@@ -52,10 +52,7 @@ function admin_is_authed(): bool {
     return !empty($_SESSION['admin_authed']);
 }
 
-/**
- * Drop-in guard. Call at top of every protected page.
- * Redirects to setup.php if no password is set yet, else to login.php.
- */
+
 function admin_require_auth(): void {
     admin_session_start();
     if (!admin_is_setup()) {

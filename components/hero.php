@@ -1,9 +1,9 @@
 <section id="hero" class="hero-geometric">
 
-    <!-- Subtle indigo→rose gradient haze -->
+    
     <div class="hero-geometric-bg"></div>
 
-    <!-- Floating elegant shapes -->
+    
     <div class="hero-shapes" aria-hidden="true">
         <div class="elegant-shape" style="
             --w: 600px; --h: 140px;
@@ -51,17 +51,14 @@
         </div>
     </div>
 
-    <!-- Content -->
+    
     <div class="hero-content">
         <div class="hero-badge">
             <span class="hero-badge-dot"></span>
             <span><?= htmlspecialchars($t['hero']['badge']) ?></span>
         </div>
 
-        <!-- MorphingText (Magic UI) — rotates through name variants.
-             Spans are pre-filled server-side so the low-power CSS-only
-             cross-fade has content without any JS. On capable devices,
-             initMorphingText() takes over and animates the gooey morph. -->
+        
         <div class="morphing-text morphing-text-hero"
              data-texts='<?= htmlspecialchars(json_encode($morphing_texts), ENT_QUOTES) ?>'>
             <span class="morph morph-1"><?= htmlspecialchars($morphing_texts[0] ?? '') ?></span>
@@ -87,9 +84,9 @@
         </div>
     </div>
 
-    <!-- Top/bottom vignette for depth -->
+    
     <div class="hero-vignette" aria-hidden="true"></div>
 
-    <!-- Soft fade into the next section's theme bg -->
+    
     <div class="section-bridge section-bridge-bottom" aria-hidden="true"></div>
 </section>

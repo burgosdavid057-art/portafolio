@@ -10,7 +10,6 @@ $err = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $pw = (string) ($_POST['password'] ?? '');
-    // Light brute-force guard: 1 second sleep on failure
     if (admin_verify_password($pw)) {
         admin_login();
         redirect('/admin/projects.php');

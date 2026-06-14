@@ -12,7 +12,6 @@ function admin_layout_start(string $title, string $active = ''): void {
     <title><?= e($title) ?> · Admin · davidburgos.dev</title>
     <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
     <?php
-        // Same cache-bust helper as the public site
         $asset = function (string $rel): string {
             $abs = $_SERVER['DOCUMENT_ROOT'] . '/' . ltrim($rel, '/');
             $v   = is_file($abs) ? filemtime($abs) : time();
@@ -24,7 +23,7 @@ function admin_layout_start(string $title, string $active = ''): void {
 </head>
 <body class="bg-[#0a0a10] text-slate-100 font-sans antialiased min-h-screen">
 <div class="flex min-h-screen">
-    <!-- Sidebar -->
+    
     <aside class="admin-sidebar">
         <a href="/admin/" class="block px-4 pt-5 pb-6">
             <div class="flex items-center gap-2 font-bold text-lg">
@@ -54,7 +53,7 @@ function admin_layout_start(string $title, string $active = ''): void {
         </div>
     </aside>
 
-    <!-- Main -->
+    
     <main class="flex-1 min-w-0">
         <header class="admin-topbar">
             <h1 class="text-xl font-bold tracking-tight"><?= e($title) ?></h1>

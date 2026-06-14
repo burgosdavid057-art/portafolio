@@ -1,12 +1,5 @@
 <?php
-/**
- * Process — "Cómo trabajo" section.
- *
- * The $process_steps array is defined in index.php. Two layouts are
- * rendered in parallel: a CSS-spinning orbital ring (desktop) and a
- * vertical numbered timeline (mobile). The active layout is chosen
- * via media query in style.css — no JS gating needed.
- */
+
 $step_count = count($process_steps);
 $ring_radius_pct = 38; // % of the ring container's half-size
 ?>
@@ -20,14 +13,13 @@ $ring_radius_pct = 38; // % of the ring container's half-size
         </p>
     </header>
 
-    <!-- Desktop / tablet: orbital ring -->
+    
     <div class="process-ring-wrapper" aria-hidden="true">
         <div class="process-ring-glow"></div>
 
         <div class="process-ring">
             <?php foreach ($process_steps as $i => $step): ?>
                 <?php
-                // Place each step around a circle, starting at the top (–90°).
                 $angle_deg = ($i / $step_count) * 360 - 90;
                 $angle_rad = deg2rad($angle_deg);
                 $x_pct = 50 + $ring_radius_pct * cos($angle_rad);
@@ -39,8 +31,7 @@ $ring_radius_pct = 38; // % of the ring container's half-size
                          top:  <?= round($y_pct, 2) ?>%;
                          --step-color: <?= htmlspecialchars($step['color']) ?>;
                      ">
-                    <!-- Separate wrapper so the counter-rotation animation
-                         doesn't overwrite the centering translate on .process-step. -->
+                    
                     <div class="process-step-rotator">
                         <div class="process-step-inner">
                             <div class="process-step-icon">
@@ -60,7 +51,7 @@ $ring_radius_pct = 38; // % of the ring container's half-size
         </div>
     </div>
 
-    <!-- Mobile: vertical numbered timeline -->
+    
     <ol class="process-timeline" aria-label="<?= htmlspecialchars($t['process']['aria_label']) ?>">
         <?php foreach ($process_steps as $i => $step): ?>
             <li class="process-timeline-step"

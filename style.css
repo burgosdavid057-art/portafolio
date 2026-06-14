@@ -1,11 +1,9 @@
-/* =========================================================
-   Theme tokens (Light / Dark)
-   ========================================================= */
+
 :root {
     --bg: 255 255 255;
     --fg: 10 10 14;
     --muted: 100 105 115;
-    --accent: 99 102 241;       /* indigo-500 */
+    --accent: 99 102 241;       
     --border: 220 222 228;
 
     --glass-bg: 255 255 255;
@@ -17,7 +15,7 @@ html.dark {
     --bg: 8 8 12;
     --fg: 240 240 245;
     --muted: 140 145 155;
-    --accent: 129 140 248;      /* indigo-400 */
+    --accent: 129 140 248;      
     --border: 35 38 45;
 
     --glass-bg: 30 30 38;
@@ -30,15 +28,11 @@ html, body {
     color: rgb(var(--fg));
     transition: background-color 0.4s ease, color 0.4s ease;
 }
-/* Ensure the html element itself paints the bg so dark-mode toggle is reliable */
+
 html { background-color: rgb(var(--bg)); }
 
 
-/* =========================================================
-   Liquid Glass Buttons + Pills
-   Frosted glass with backdrop-filter, inner highlights for
-   "depth", and a cursor-tracking light sweep.
-   ========================================================= */
+
 .glass-button {
     --mx: 50%;
     --my: 50%;
@@ -83,7 +77,7 @@ html { background-color: rgb(var(--bg)); }
         0 4px 24px -8px rgb(0 0 0 / 0.40);
 }
 
-/* Top gloss */
+
 .glass-button::before {
     content: '';
     position: absolute;
@@ -96,7 +90,7 @@ html { background-color: rgb(var(--bg)); }
     z-index: 0;
 }
 
-/* Cursor-tracking light sweep */
+
 .glass-button::after {
     content: '';
     position: absolute;
@@ -127,7 +121,7 @@ html { background-color: rgb(var(--bg)); }
 .glass-button:hover .arrow { transform: translateX(3px); }
 .arrow { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
 
-/* Primary variant — inverted, the "Apple primary" feel */
+
 .glass-button-primary {
     background: rgb(var(--fg) / 0.92);
     color: rgb(var(--bg));
@@ -151,7 +145,7 @@ html { background-color: rgb(var(--bg)); }
         rgb(var(--glass-highlight) / 0) 50%);
 }
 
-/* Dark-mode primary: keep it visible without the harsh black-on-white look */
+
 :is(html.dark, .force-dark) .glass-button-primary {
     background: rgb(var(--fg) / 0.10);
     color: rgb(var(--fg));
@@ -168,8 +162,7 @@ html { background-color: rgb(var(--bg)); }
     border-color: rgb(var(--fg) / 0.35);
 }
 
-/* CTA — vibrant gradient button, identical in light AND dark mode.
-   Use for the "look at me" actions like the email button. */
+
 .glass-button-cta {
     background: linear-gradient(120deg,
         #6366f1 0%,
@@ -188,7 +181,7 @@ html { background-color: rgb(var(--bg)); }
     animation: cta-gradient-shift 8s ease infinite;
 }
 .glass-button-cta::before {
-    /* override the default glossy stripe */
+    
     background: linear-gradient(180deg,
         rgb(255 255 255 / 0.25) 0%,
         rgb(255 255 255 / 0) 55%);
@@ -202,7 +195,7 @@ html { background-color: rgb(var(--bg)); }
         0 0 0 1px rgb(255 255 255 / 0.18);
 }
 :is(html.dark, .force-dark) .glass-button-cta {
-    /* Use !important to win over the dark-mode primary rule above */
+    
     background: linear-gradient(120deg,
         #6366f1 0%,
         #a855f7 25%,
@@ -217,14 +210,14 @@ html { background-color: rgb(var(--bg)); }
     100% { background-position: 0% 50%; }
 }
 
-/* Large variant for hero/contact */
+
 .glass-button-lg {
     height: 3.25rem;
     padding: 0 1.75rem;
     font-size: 0.95rem;
 }
 
-/* Icon-only square variant for nav arrows */
+
 .glass-icon {
     width: 2.75rem;
     height: 2.75rem;
@@ -233,7 +226,7 @@ html { background-color: rgb(var(--bg)); }
 .glass-icon:disabled,
 .glass-icon[disabled] { opacity: 0.35; pointer-events: none; }
 
-/* Disabled-looking glass (e.g. "Próximamente") */
+
 .glass-button-disabled {
     cursor: default;
     color: rgb(var(--muted));
@@ -241,9 +234,7 @@ html { background-color: rgb(var(--bg)); }
 .glass-button-disabled:hover { transform: none; }
 
 
-/* =========================================================
-   Glass Pills (status badges, tags)
-   ========================================================= */
+
 .glass-pill {
     display: inline-flex;
     align-items: center;
@@ -270,13 +261,13 @@ html { background-color: rgb(var(--bg)); }
     font-size: 0.7rem;
 }
 
-/* Status indicator dots */
+
 .status-dot {
     position: relative;
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 9999px;
-    background: rgb(52 211 153);          /* emerald — "online" */
+    background: rgb(52 211 153);          
     box-shadow: 0 0 0 0 rgb(52 211 153 / 0.6);
     animation: status-pulse 2s ease-out infinite;
 }
@@ -299,15 +290,12 @@ html { background-color: rgb(var(--bg)); }
 }
 
 
-/* =========================================================
-   Site Header — liquid-glass bar with sliding indicator
-   and scroll-progress underline.
-   ========================================================= */
+
 .site-header {
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 50;
-    color: #fff;                /* default = over the dark hero */
+    color: #fff;                
     transition:
         background-color 0.35s ease,
         border-color     0.35s ease,
@@ -341,7 +329,7 @@ html { background-color: rgb(var(--bg)); }
     margin-left: 0.05em;
 }
 
-/* The pill nav — liquid-glass capsule with a sliding indicator */
+
 .header-nav {
     position: relative;
     display: none;
@@ -396,7 +384,7 @@ html { background-color: rgb(var(--bg)); }
     z-index: 0;
 }
 
-/* Scroll-progress bar at the bottom of the header */
+
 .header-progress {
     position: relative;
     height: 2px;
@@ -411,7 +399,7 @@ html { background-color: rgb(var(--bg)); }
     transition: width 0.06s linear;
 }
 
-/* When scrolled past the dark hero: switch to theme colors */
+
 .site-header.is-scrolled {
     background: rgb(var(--bg) / 0.70);
     border-bottom-color: rgb(var(--border) / 0.5);
@@ -434,7 +422,7 @@ html { background-color: rgb(var(--bg)); }
 }
 .site-header.is-scrolled .header-progress { background: rgb(var(--fg) / 0.05); }
 
-/* Theme toggle button inside header — match current header color */
+
 .site-header .theme-toggler {
     border-color: rgb(255 255 255 / 0.20);
     color: inherit;
@@ -444,10 +432,7 @@ html { background-color: rgb(var(--bg)); }
 }
 
 
-/* =========================================================
-   MorphingText (Magic UI)
-   Two stacked text spans cross-fade-blur via SVG threshold.
-   ========================================================= */
+
 .morphing-text {
     position: relative;
     display: block;
@@ -469,11 +454,11 @@ html { background-color: rgb(var(--bg)); }
     color: rgb(var(--fg));
     will-change: filter, opacity;
 }
-/* When the morphing text lives inside the dark hero, force light color */
+
 .hero-geometric .morphing-text .morph {
     color: #fff;
 }
-/* Hero variant — bigger */
+
 .morphing-text-hero {
     height: clamp(5rem, 16vw, 12rem);
     margin-bottom: 1.5rem;
@@ -484,10 +469,7 @@ html { background-color: rgb(var(--bg)); }
 }
 
 
-/* =========================================================
-   Hero — HeroGeometric (kokonut/benscott style)
-   Dark stage with 5 floating "elegant shape" pills.
-   ========================================================= */
+
 .hero-geometric {
     position: relative;
     width: 100%;
@@ -518,8 +500,7 @@ html { background-color: rgb(var(--bg)); }
     pointer-events: none;
 }
 
-/* Outer wrapper handles the entry: drops in + rotates from a tilted start.
-   Inner wrapper handles the continuous gentle float. */
+
 .elegant-shape {
     position: absolute;
     opacity: 0;
@@ -581,7 +562,7 @@ html { background-color: rgb(var(--bg)); }
     padding: 0 1.5rem;
 }
 
-/* Each content piece fades up with a stagger */
+
 .hero-badge,
 .hero-title,
 .hero-tagline,
@@ -663,7 +644,7 @@ html { background-color: rgb(var(--bg)); }
     justify-content: center;
 }
 
-/* Glass buttons inside the dark hero need different surface tones */
+
 .glass-on-dark {
     background: rgb(255 255 255 / 0.06) !important;
     border-color: rgb(255 255 255 / 0.12) !important;
@@ -683,15 +664,12 @@ html { background-color: rgb(var(--bg)); }
 }
 
 
-/* =========================================================
-   GradientDots — animated hexagonal dot pattern
-   Direct CSS port of the framer-motion component.
-   ========================================================= */
+
 .gradient-dots {
     --gd-bg: rgb(var(--bg));
     --gd-dot: 8px;
     --gd-spacing: 10px;
-    --gd-hex: 17.32px; /* spacing * 1.732 */
+    --gd-hex: 17.32px; 
 
     position: absolute;
     inset: 0;
@@ -742,9 +720,7 @@ html { background-color: rgb(var(--bg)); }
 }
 
 
-/* =========================================================
-   Contact — flashy with gradient dots + huge headline
-   ========================================================= */
+
 .contact-section {
     position: relative;
     padding: 9rem 1.5rem;
@@ -837,9 +813,7 @@ html { background-color: rgb(var(--bg)); }
 }
 
 
-/* =========================================================
-   ScrollBasedVelocity
-   ========================================================= */
+
 .scroll-velocity-container { padding: 1rem 0; }
 .scroll-velocity-row { overflow: hidden; }
 .scroll-velocity-track { will-change: transform; }
@@ -859,9 +833,7 @@ html { background-color: rgb(var(--bg)); }
 }
 
 
-/* =========================================================
-   DiaTextReveal
-   ========================================================= */
+
 .dia-text-reveal {
     font-size: clamp(2rem, 5vw, 3.25rem);
     font-weight: 800;
@@ -891,9 +863,7 @@ html { background-color: rgb(var(--bg)); }
 }
 
 
-/* =========================================================
-   IconCloud
-   ========================================================= */
+
 .icon-cloud-wrapper {
     width: min(420px, 100%);
     aspect-ratio: 1 / 1;
@@ -912,9 +882,7 @@ html { background-color: rgb(var(--bg)); }
 .icon-cloud-canvas:active { cursor: grabbing; }
 
 
-/* =========================================================
-   AnimatedThemeToggler
-   ========================================================= */
+
 .theme-toggler { color: rgb(var(--fg)); overflow: hidden; }
 .theme-toggler .theme-icon {
     transition:
@@ -927,11 +895,7 @@ html.dark       .theme-toggler .sun  { transform: rotate(-90deg) scale(0); opaci
 html.dark       .theme-toggler .moon { transform: rotate(0deg) scale(1); opacity: 1; }
 
 
-/* =========================================================
-   Ethereal Shadow (background for About)
-   Direct CSS/SVG port — the SVG filter values are animated
-   via SMIL <animate> so no framer-motion is needed.
-   ========================================================= */
+
 .about-section {
     position: relative;
     padding: 7rem 1.5rem;
@@ -982,7 +946,7 @@ html.dark       .theme-toggler .moon { transform: rotate(0deg) scale(1); opacity
     mix-blend-mode: overlay;
 }
 
-/* Soft tint over the shadow so content stays legible in both themes */
+
 .ethereal-shadow-tint {
     position: absolute;
     inset: 0;
@@ -999,9 +963,7 @@ html.dark       .theme-toggler .moon { transform: rotate(0deg) scale(1); opacity
 }
 
 
-/* =========================================================
-   About — alems.tech-inspired layout
-   ========================================================= */
+
 .about-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -1056,7 +1018,7 @@ html.dark       .theme-toggler .moon { transform: rotate(0deg) scale(1); opacity
 }
 .about-strong { color: rgb(var(--fg)); font-weight: 600; }
 
-/* Stats grid */
+
 .about-stats {
     margin-top: 2.5rem;
     display: grid;
@@ -1092,7 +1054,7 @@ html.dark       .theme-toggler .moon { transform: rotate(0deg) scale(1); opacity
     color: rgb(var(--muted));
 }
 
-/* Identity card */
+
 .about-card {
     position: relative;
     padding: 2.25rem 1.75rem;
@@ -1188,11 +1150,7 @@ html.dark       .theme-toggler .moon { transform: rotate(0deg) scale(1); opacity
 }
 .about-card-meta svg { color: rgb(var(--muted)); flex-shrink: 0; }
 
-/* =========================================================
-   About — Globe variant (Magic UI Globe via cobe)
-   Vertically centered on the right column, square card with
-   the globe rotating beneath a soft gradient "Globe" title.
-   ========================================================= */
+
 .about-card--globe {
     padding: 0;
     align-self: center;
@@ -1278,9 +1236,7 @@ html:not(.dark) .about-globe-title {
 }
 
 
-/* =========================================================
-   Projects — Horizontal Scroller
-   ========================================================= */
+
 .projects-scroller {
     width: 100%;
     overflow-x: auto;
@@ -1292,7 +1248,7 @@ html:not(.dark) .about-globe-title {
     cursor: grab;
     -webkit-overflow-scrolling: touch;
     padding: 1rem 0 2rem;
-    /* fade edges */
+    
     mask-image: linear-gradient(90deg,
         transparent 0,
         black 5%,
@@ -1350,7 +1306,7 @@ html:not(.dark) .about-globe-title {
     transition: opacity 0.5s ease;
 }
 
-/* Cursor spotlight inside the card */
+
 .project-card-spotlight {
     position: absolute;
     inset: 0;
@@ -1384,7 +1340,7 @@ html:not(.dark) .about-globe-title {
     font-feature-settings: 'tnum';
 }
 
-/* Centered line-icon watermark — uses the project's accent color (currentColor) */
+
 .project-icon-bg {
     position: absolute;
     inset: 0;
@@ -1411,7 +1367,7 @@ html:not(.dark) .about-globe-title {
     opacity: 0.55;
 }
 
-/* Brand logo chip — sits next to the project number */
+
 .project-logo {
     width: 2.25rem;
     height: 2.25rem;
@@ -1434,7 +1390,7 @@ html:not(.dark) .about-globe-title {
 }
 .project-logo.project-logo-missing { display: none; }
 
-/* Circular brand image — overlaps the right edge of the card */
+
 .project-image-badge {
     position: absolute;
     right: -2.5rem;
@@ -1496,7 +1452,7 @@ html:not(.dark) .about-globe-title {
     border: 1px solid rgb(var(--fg) / 0.08);
 }
 
-/* Progress dots */
+
 .project-dot {
     width: 0.5rem;
     height: 0.5rem;
@@ -1513,10 +1469,7 @@ html:not(.dark) .about-globe-title {
 }
 
 
-/* =========================================================
-   Section bridges — soft fades between sections so the
-   theme/dark transitions feel gradual instead of abrupt.
-   ========================================================= */
+
 .section-bridge {
     position: absolute;
     left: 0;
@@ -1525,7 +1478,7 @@ html:not(.dark) .about-globe-title {
     z-index: 5;
     height: 180px;
 }
-/* Bottom of a dark section fading into the theme bg below */
+
 .section-bridge-bottom {
     bottom: 0;
     background: linear-gradient(
@@ -1534,7 +1487,7 @@ html:not(.dark) .about-globe-title {
         rgb(var(--bg) / 0.4) 60%,
         rgb(var(--bg)) 100%);
 }
-/* Top of a section fading from the theme bg above (light → dark hand-off) */
+
 .section-bridge-top {
     top: 0;
     background: linear-gradient(
@@ -1543,10 +1496,7 @@ html:not(.dark) .about-globe-title {
         rgb(var(--bg) / 0.4) 60%,
         rgb(var(--bg)) 100%);
 }
-/* Dark variant — for sections that are dark internally and need to
-   fade to/from theme bg on the outer edges.
-   Colors are explicit (not var(--bg)) because these bridges live inside
-   a force-dark scope that overrides --bg locally. */
+
 .section-bridge-dark.section-bridge-top {
     height: 280px;
     background: linear-gradient(
@@ -1583,7 +1533,7 @@ html.dark .section-bridge-dark.section-bridge-bottom {
         rgb(8 8 12 / 0.3) 50%,
         rgb(8 8 12 / 0.85) 100%);
 }
-/* Top of a section that was preceded by a cosmic-dark section */
+
 .section-bridge-from-dark {
     background: linear-gradient(
         to bottom,
@@ -1593,18 +1543,14 @@ html.dark .section-bridge-dark.section-bridge-bottom {
 }
 
 
-/* =========================================================
-   Projects — Cosmic backdrop (CelestialSphere shader)
-   The section sets a force-dark scope so cards/glass keep
-   their dark-mode look regardless of the global theme.
-   ========================================================= */
+
 .projects-section {
     position: relative;
     padding: 8rem 0 6rem;
     overflow: hidden;
     background: #030303;
     color: rgb(var(--fg));
-    /* Force the dark token set INSIDE this section */
+    
     --bg: 3 3 3;
     --fg: 240 240 245;
     --muted: 150 155 165;
@@ -1620,7 +1566,7 @@ html.dark .section-bridge-dark.section-bridge-bottom {
     inset: 0;
     z-index: 0;
     overflow: hidden;
-    /* Soft fade-in at top/bottom so the cosmic doesn't appear as a hard edge */
+    
     mask-image: linear-gradient(to bottom,
         transparent 0%,
         black 14%,
@@ -1655,13 +1601,12 @@ html.dark .section-bridge-dark.section-bridge-bottom {
     z-index: 4;
 }
 
-/* Bridges live BEHIND the inner content so the fade doesn't obscure the
-   "Proyectos" title or the progress dots. */
+
 .projects-section .section-bridge {
     z-index: 1;
 }
 
-/* Tighten the existing scroller mask to use the section's dark bg */
+
 .projects-section .projects-scroller {
     mask-image: linear-gradient(90deg,
         transparent 0,
@@ -1676,15 +1621,13 @@ html.dark .section-bridge-dark.section-bridge-bottom {
 }
 
 
-/* =========================================================
-   Misc
-   ========================================================= */
+
 ::selection { background: rgb(var(--accent) / 0.3); color: rgb(var(--fg)); }
 
-/* Copy feedback */
+
 .copy-success .copy-label { color: rgb(52 211 153); }
 
-/* Respect users who prefer no motion */
+
 @media (prefers-reduced-motion: reduce) {
     .scroll-velocity-track,
     .status-dot,

@@ -1,9 +1,9 @@
 <section id="projects" class="projects-section force-dark">
-    <!-- CelestialSphere WebGL backdrop -->
+    
     <div id="celestial-mount" class="celestial-mount" aria-hidden="true"></div>
-    <!-- Vignette that focuses attention on the cards -->
+    
     <div class="projects-vignette" aria-hidden="true"></div>
-    <!-- Top/bottom fades into surrounding theme bg -->
+    
     <div class="section-bridge section-bridge-top section-bridge-dark" aria-hidden="true"></div>
     <div class="section-bridge section-bridge-bottom section-bridge-dark" aria-hidden="true"></div>
 
@@ -18,7 +18,7 @@
                 </p>
             </div>
 
-            <!-- Navigation buttons (liquid glass) -->
+            
             <div class="flex items-center gap-3">
                 <button type="button" class="glass-button glass-icon" data-scroll-dir="prev" aria-label="<?= htmlspecialchars($t['projects']['aria_prev']) ?>">
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -33,17 +33,17 @@
             </div>
         </div>
 
-        <!-- Horizontal scroller -->
+        
         <div class="projects-scroller" data-projects-scroller>
             <div class="projects-track">
                 <?php foreach ($projects as $idx => $project): ?>
                     <article class="project-card group"
                              style="--accent-rgb: <?= htmlspecialchars($project['accent']) ?>">
 
-                        <!-- Background gradient -->
+                        
                         <div class="project-card-bg bg-gradient-to-br <?= htmlspecialchars($project['gradient']) ?>"></div>
 
-                        <!-- Centered line-icon watermark (currentColor → project accent) -->
+                        
                         <?php
                         if (empty($project['image']) && !empty($project['icon'])):
                             $iconPath = dirname(__DIR__) . '/assets/svg/projects/' . $project['icon'] . '.svg';
@@ -54,7 +54,7 @@
                             </div>
                         <?php endif; endif; ?>
 
-                        <!-- Circular project image badge on the right edge -->
+                        
                         <?php if (!empty($project['image'])): ?>
                             <div class="project-image-badge" aria-hidden="true">
                                 <img src="<?= htmlspecialchars($project['image']) ?>"
@@ -63,11 +63,11 @@
                             </div>
                         <?php endif; ?>
 
-                        <!-- Hover spotlight follows the cursor -->
+                        
                         <div class="project-card-spotlight"></div>
 
                         <div class="project-card-inner">
-                            <!-- Header row: number on the left, tag + year on the right -->
+                            
                             <div class="flex items-start justify-between mb-auto gap-3">
                                 <div class="flex items-center gap-3 min-w-0">
                                     <span class="project-number">0<?= $idx + 1 ?></span>
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
 
-                            <!-- Status indicator -->
+                            
                             <div class="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted mt-auto">
                                 <?php if ($project['status'] === $t['projects']['status_dev']): ?>
                                     <span class="status-dot status-dot-amber"></span>
@@ -92,24 +92,24 @@
                                 <?= htmlspecialchars($project['status']) ?>
                             </div>
 
-                            <!-- Title -->
+                            
                             <h3 class="project-title mt-3">
                                 <?= htmlspecialchars($project['title']) ?>
                             </h3>
 
-                            <!-- Description -->
+                            
                             <p class="project-description">
                                 <?= htmlspecialchars($project['description']) ?>
                             </p>
 
-                            <!-- Stack chips -->
+                            
                             <div class="flex flex-wrap gap-2 mt-5">
                                 <?php foreach ($project['stack'] as $tech): ?>
                                     <span class="project-tech-chip"><?= htmlspecialchars($tech) ?></span>
                                 <?php endforeach; ?>
                             </div>
 
-                            <!-- Actions -->
+                            
                             <div class="flex flex-wrap items-center gap-2.5 mt-7">
                                 <?php if ($project['url'] !== '#'): ?>
                                     <a href="<?= htmlspecialchars($project['url']) ?>"
@@ -146,7 +146,7 @@
             </div>
         </div>
 
-        <!-- Progress dots -->
+        
         <div class="flex items-center justify-center gap-2 mt-8 relative z-10" data-projects-dots>
             <?php foreach ($projects as $idx => $project): ?>
                 <button type="button" class="project-dot<?= $idx === 0 ? ' is-active' : '' ?>"

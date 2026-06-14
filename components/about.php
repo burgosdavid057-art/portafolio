@@ -1,10 +1,10 @@
 <section id="about" class="about-section">
-    <!-- Soft fade from the dark hero into this section -->
+    
     <div class="section-bridge section-bridge-top" aria-hidden="true"></div>
 
-    <!-- ===== Ethereal Shadow background ===== -->
+    
     <div class="ethereal-shadow" aria-hidden="true">
-        <!-- SVG filter (animated via SMIL — no JS required) -->
+        
         <svg class="ethereal-svg" width="0" height="0">
             <defs>
                 <filter id="ethereal-filter" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
@@ -45,19 +45,19 @@
             </defs>
         </svg>
 
-        <!-- The filtered shape (gray fill masked into an organic blob) -->
+        
         <div class="ethereal-shadow-filtered">
             <div class="ethereal-shadow-fill"></div>
         </div>
 
-        <!-- Noise overlay -->
+        
         <div class="ethereal-shadow-noise"></div>
 
-        <!-- Tinting fade so the section's content stays readable -->
+        
         <div class="ethereal-shadow-tint"></div>
     </div>
 
-    <!-- ===== Existing content, unchanged ===== -->
+    
     <div class="about-inner max-w-5xl mx-auto">
         <p class="about-eyebrow">
             <span class="about-eyebrow-line"></span>
@@ -72,7 +72,7 @@
                 </h2>
 
                 <div class="about-paragraphs">
-                    <p><?= $t['about']['p1_html'] /* contains <span class="about-strong"> */ ?></p>
+                    <p><?= $t['about']['p1_html']  ?></p>
                     <p><?= htmlspecialchars($t['about']['p2']) ?></p>
                     <p><?= htmlspecialchars($t['about']['p3']) ?></p>
                 </div>

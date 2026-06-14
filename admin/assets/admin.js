@@ -1,8 +1,8 @@
-/* ===== Admin frontend — modals + kanban drag-drop ===== */
+
 (() => {
     'use strict';
 
-    /* ---------- Generic modal handler ---------- */
+    
     const openModal = (name) => {
         const m = document.querySelector(`[data-modal="${name}"]`);
         if (!m) return;
@@ -23,7 +23,7 @@
         if (e.key === 'Escape') closeAnyModal();
     });
 
-    /* ---------- Kanban ---------- */
+    
     const board = document.querySelector('.kanban-board');
     if (!board) return;
 
@@ -40,7 +40,7 @@
         if (head) head.textContent = String(col.children.length);
     };
 
-    /* SortableJS (loaded via CDN, init when ready) */
+    
     const initSortable = () => {
         if (typeof Sortable === 'undefined') {
             setTimeout(initSortable, 50);
@@ -77,7 +77,7 @@
 
     initSortable();
 
-    /* ---------- Open task modal for create / edit ---------- */
+    
     const setStatusInput = (status) => { taskForm.elements.status.value = status; };
     const resetTaskForm = () => {
         taskForm.reset();
@@ -113,7 +113,7 @@
         }
     });
 
-    /* ---------- Task form submit (create + update via fetch) ---------- */
+    
     taskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const fd = new FormData(taskForm);

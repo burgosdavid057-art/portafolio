@@ -1,4 +1,4 @@
-/* ===== Admin CSS — pairs with the compiled Tailwind utilities ===== */
+
 
 :root {
     --a-bg:         #0a0a10;
@@ -14,7 +14,7 @@
 
 body { background: var(--a-bg); color: var(--a-text); }
 
-/* ===== Sidebar / topbar ===== */
+
 .admin-sidebar {
     width: 14rem;
     flex-shrink: 0;
@@ -63,7 +63,7 @@ body { background: var(--a-bg); color: var(--a-text); }
     .admin-sidebar.is-open { left: 0; }
 }
 
-/* ===== Cards / inputs / buttons ===== */
+
 .admin-card {
     background: var(--a-panel);
     border: 1px solid var(--a-border);
@@ -121,7 +121,7 @@ body { background: var(--a-bg); color: var(--a-text); }
 }
 .admin-btn-danger:hover { background: rgb(244 63 94 / 0.22); }
 
-/* ===== Chips / flashes ===== */
+
 .admin-chip {
     display: inline-block;
     font-size: 0.65rem;
@@ -147,7 +147,7 @@ body { background: var(--a-bg); color: var(--a-text); }
 .admin-flash-success { color: #34d399; border-color: rgb(52 211 153 / 0.35); background: rgb(52 211 153 / 0.08); }
 .admin-flash-error   { color: #fb7185; border-color: rgb(244 63 94 / 0.35);  background: rgb(244 63 94 / 0.08); }
 
-/* ===== Project card colors ===== */
+
 .admin-project-card {
     display: block;
     background: var(--a-panel);
@@ -180,7 +180,7 @@ body { background: var(--a-bg); color: var(--a-text); }
 .admin-color-fuchsia  { color: #e879f9; }
 .admin-color-cyan     { color: #22d3ee; }
 
-/* ===== Tabs ===== */
+
 .admin-tab {
     padding: 0.6rem 0.9rem;
     color: var(--a-muted);
@@ -195,7 +195,7 @@ body { background: var(--a-bg); color: var(--a-text); }
     border-color: var(--a-accent);
 }
 
-/* ===== Kanban ===== */
+
 .kanban-board {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -302,7 +302,7 @@ body { background: var(--a-bg); color: var(--a-text); }
     background: rgb(129 140 248 / 0.06);
 }
 
-/* ===== Modal ===== */
+
 .admin-modal {
     position: fixed;
     inset: 0;
@@ -331,7 +331,7 @@ body { background: var(--a-bg); color: var(--a-text); }
     box-shadow: 0 20px 50px -10px rgb(0 0 0 / 0.6);
 }
 
-/* ===== Misc ===== */
+
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;

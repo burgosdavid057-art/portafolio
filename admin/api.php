@@ -6,7 +6,7 @@ admin_require_auth();
 $db = admin_db();
 $action = (string) ($_REQUEST['action'] ?? '');
 
-/** Send a JSON response and exit. */
+
 function json_out($data, int $code = 200): void {
     http_response_code($code);
     header('Content-Type: application/json; charset=utf-8');
@@ -14,7 +14,7 @@ function json_out($data, int $code = 200): void {
     exit;
 }
 
-/** Either redirect back (form-based) or return JSON (AJAX). */
+
 function done(string $type, string $msg, ?array $jsonExtra = null): void {
     $redir = (string) ($_REQUEST['redirect'] ?? '');
     if ($redir && str_starts_with($redir, '/admin/')) {
@@ -24,13 +24,11 @@ function done(string $type, string $msg, ?array $jsonExtra = null): void {
     if ($jsonExtra) $resp += $jsonExtra;
     json_out($resp);
 }
-
-// All mutating actions require CSRF
 csrf_check();
 
 switch ($action) {
 
-    /* ========== TASKS ========== */
+    
 
     case 'task-create': {
         $pid = (int) ($_REQUEST['project_id'] ?? 0);
@@ -39,8 +37,6 @@ switch ($action) {
 
         $status = in_array($_REQUEST['status'] ?? '', STATUS_ORDER, true) ? $_REQUEST['status'] : 'todo';
         $priority = in_array($_REQUEST['priority'] ?? '', array_keys(PRIORITY_LABEL), true) ? $_REQUEST['priority'] : 'medium';
-
-        // New tasks go to the end of their column
         $pos = (int) $db->query("SELECT COALESCE(MAX(position),-1)+1 FROM tasks
                                   WHERE project_id={$pid} AND status='" . str_replace("'", '', $status) . "'")->fetchColumn();
 
@@ -83,8 +79,6 @@ switch ($action) {
     }
 
     case 'task-move': {
-        // Drag-drop: reorder + possibly change column.
-        // Payload: { id, status, position, project_id }
         $id  = (int) ($_REQUEST['id'] ?? 0);
         $newStatus = in_array($_REQUEST['status'] ?? '', STATUS_ORDER, true) ? $_REQUEST['status'] : null;
         $newPos    = max(0, (int) ($_REQUEST['position'] ?? 0));
@@ -96,13 +90,10 @@ switch ($action) {
 
         $db->beginTransaction();
         try {
-            // Take the task out of its old column ordering
             $db->prepare(
                 'UPDATE tasks SET position = position - 1
                   WHERE project_id=? AND status=? AND position > ?'
             )->execute([$pid, $row['status'], $row['position']]);
-
-            // Make room in the new column at newPos
             $db->prepare(
                 'UPDATE tasks SET position = position + 1
                   WHERE project_id=? AND status=? AND position >= ? AND id <> ?'
@@ -127,7 +118,7 @@ switch ($action) {
         json_out(['ok' => true]);
     }
 
-    /* ========== OBSERVATIONS ========== */
+    
 
     case 'obs-create': {
         $pid = (int) ($_REQUEST['project_id'] ?? 0);
@@ -146,7 +137,7 @@ switch ($action) {
         done('success', 'Observación eliminada.');
     }
 
-    /* ========== FINANCES ========== */
+    
 
     case 'fin-create': {
         $pid = (int) ($_REQUEST['project_id'] ?? 0);
@@ -176,7 +167,7 @@ switch ($action) {
         done('success', 'Movimiento eliminado.');
     }
 
-    /* ========== DOCUMENTS ========== */
+    
 
     case 'doc-upload': {
         $pid = (int) ($_REQUEST['project_id'] ?? 0);
@@ -189,7 +180,6 @@ switch ($action) {
 
         $orig = basename((string) $f['name']);
         $ext  = strtolower(pathinfo($orig, PATHINFO_EXTENSION));
-        // Soft denylist for obviously dangerous types
         if (in_array($ext, ['php', 'phtml', 'phar', 'html', 'htm', 'js', 'exe', 'bat', 'sh'], true)) {
             done('error', 'Extensión no permitida (' . htmlspecialchars($ext) . ').');
         }
@@ -227,7 +217,6 @@ switch ($action) {
     }
 
     case 'doc-serve': {
-        // Auth-gated file serving — files live OUTSIDE httpdocs, so PHP streams them.
         $id = (int) ($_REQUEST['id'] ?? 0);
         $row = $db->query("SELECT * FROM documents WHERE id={$id}")->fetch();
         if (!$row) { http_response_code(404); exit('Not found'); }

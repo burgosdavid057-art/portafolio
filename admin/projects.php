@@ -5,8 +5,6 @@ require_once __DIR__ . '/lib/layout.php';
 admin_require_auth();
 
 $db = admin_db();
-
-// Handle create / edit / delete via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $action = (string) ($_POST['action'] ?? '');
@@ -40,8 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
-// Fetch all projects with task counts + finance totals
 $projects = $db->query(
     'SELECT p.*,
             (SELECT COUNT(*) FROM tasks t WHERE t.project_id = p.id) AS task_count,
@@ -113,7 +109,7 @@ admin_layout_start('Proyectos', 'projects');
     </div>
 <?php endif; ?>
 
-<!-- New Project Modal -->
+
 <div class="admin-modal hidden" id="modal-new-project" data-modal="new-project">
     <div class="admin-modal-backdrop" data-close-modal></div>
     <div class="admin-modal-panel">

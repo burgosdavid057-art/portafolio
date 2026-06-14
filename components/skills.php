@@ -9,7 +9,7 @@
     </div>
 
     <div class="scroll-velocity-container relative w-full overflow-hidden">
-        <!-- Row 1, direction +1 -->
+        
         <div class="scroll-velocity-row flex whitespace-nowrap" data-direction="1" data-base-velocity="20">
             <div class="scroll-velocity-track flex">
                 <?php foreach (array_merge($skills_row_1, $skills_row_1, $skills_row_1, $skills_row_1) as $skill): ?>
@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <!-- Row 2, direction -1 -->
+        
         <div class="scroll-velocity-row flex whitespace-nowrap mt-4" data-direction="-1" data-base-velocity="20">
             <div class="scroll-velocity-track flex">
                 <?php foreach (array_merge($skills_row_2, $skills_row_2, $skills_row_2, $skills_row_2) as $skill): ?>
@@ -29,12 +29,12 @@
             </div>
         </div>
 
-        <!-- gradient fades on sides -->
+        
         <div class="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background to-transparent"></div>
         <div class="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background to-transparent"></div>
     </div>
 
-    <!-- IconCloud (Magic UI) -->
+    
     <div class="max-w-4xl mx-auto px-6 mt-20 flex flex-col items-center">
         <p class="text-center text-muted mb-6 text-sm uppercase tracking-[0.25em]">
             <?= htmlspecialchars($t['skills']['stack_label']) ?>

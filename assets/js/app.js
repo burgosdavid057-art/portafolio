@@ -1,24 +1,13 @@
-/* =========================================================
-   Portfolio — David Burgos
-   Vanilla JS re-implementation of the Magic UI components:
-     1. AnimatedThemeToggler
-     2. MorphingText
-     3. ScrollBasedVelocity
-     4. DiaTextReveal
-   The RainbowButton is pure CSS.
-   ========================================================= */
+
 
 (() => {
     'use strict';
 
-    /* Single source of truth for the low-power flag.
-       The class is set in <head> before any of this runs. */
+    
     const isLowPowerDevice = () =>
         document.documentElement.classList.contains('low-power');
 
-    /* ---------------------------------------------------------
-       1. AnimatedThemeToggler
-       --------------------------------------------------------- */
+    
     function initThemeToggler() {
         const btn = document.getElementById('theme-toggler');
         if (!btn) return;
@@ -30,8 +19,6 @@
 
         btn.addEventListener('click', () => {
             const isDark = document.documentElement.classList.contains('dark');
-
-            // Use View Transitions API if supported for a smooth swap
             if (document.startViewTransition) {
                 document.startViewTransition(() => apply(!isDark));
             } else {
@@ -40,14 +27,8 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       2. MorphingText
-       Two stacked spans cross-fade with a blur+threshold filter,
-       mimicking magicui's morphing-text.
-       --------------------------------------------------------- */
+    
     function initMorphingText() {
-        // Low-power devices (incl. all phones) use a pure-CSS cross-fade
-        // between the two pre-filled name spans — no rAF loop, no SVG filter.
         if (isLowPowerDevice()) return;
         document.querySelectorAll('.morphing-text').forEach((root) => {
             let texts;
@@ -72,19 +53,14 @@
 
             morph1.textContent = texts[textIndex % texts.length];
             morph2.textContent = texts[(textIndex + 1) % texts.length];
-
-            // Low-power devices choke on the per-frame blur + SVG threshold
-            // filter. Detected once at boot via the html.low-power flag.
             const isLowPower = isLowPowerDevice();
 
             const setMorph = (fraction) => {
                 if (isLowPower) {
-                    // Cheap cross-fade only — no blur, no SVG filter math
                     morph2.style.opacity = String(fraction);
                     morph1.style.opacity = String(1 - fraction);
                     return;
                 }
-                // Desktop: gooey blob effect via per-frame blur
                 morph2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
                 morph2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
 
@@ -111,10 +87,6 @@
                 }
                 setMorph(fraction);
             };
-
-            // Pause the rAF loop when the hero is off-screen — saves
-            // ~60 frames/sec of timer + DOM work while the user is reading
-            // the rest of the page.
             let visible = true;
             if ('IntersectionObserver' in window) {
                 const io = new IntersectionObserver((entries) => {
@@ -135,7 +107,6 @@
                 cooldown -= dt;
                 if (cooldown <= 0) {
                     if (morph === 0) {
-                        // start a new morph cycle
                         textIndex = (textIndex + 1) % texts.length;
                         morph1.textContent = texts[textIndex % texts.length];
                         morph2.textContent = texts[(textIndex + 1) % texts.length];
@@ -151,23 +122,11 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       3. ScrollBasedVelocity
-       Two infinitely-scrolling rows whose speed responds to
-       the user's scroll velocity, like magicui scroll-based-velocity.
-       --------------------------------------------------------- */
+    
     function initScrollVelocity() {
-        // The skills marquee is now a pure-CSS animation for ALL devices —
-        // constant speed, GPU-composited, zero per-frame JS. The old
-        // scroll-reactive version ran 3 rAF loops and lagged low-resource
-        // desktops, so it's retired. See .scroll-velocity-* in style.css.
     }
 
-    /* ---------------------------------------------------------
-       4. DiaTextReveal
-       Splits text into letters, reveals on intersection with a
-       brief tint from a palette of colors, like dia-text-reveal.
-       --------------------------------------------------------- */
+    
     function initDiaTextReveal() {
         const nodes = document.querySelectorAll('.dia-text-reveal');
         if (!nodes.length) return;
@@ -213,12 +172,7 @@
         nodes.forEach((n) => io.observe(n));
     }
 
-    /* ---------------------------------------------------------
-       5. IconCloud
-       Canvas-based rotating sphere of brand icons. Points are
-       distributed via a Fibonacci spiral on the unit sphere, then
-       projected to 2D each frame. Back icons fade/shrink for depth.
-       --------------------------------------------------------- */
+    
     function initIconCloud() {
         document.querySelectorAll('.icon-cloud-canvas').forEach((canvas) => {
             let slugs;
@@ -230,8 +184,6 @@
             if (!slugs.length) return;
 
             const ctx = canvas.getContext('2d');
-            // Lower DPR on low-power devices halves the per-frame paint cost
-            // of the rotating icon sphere with no visible quality loss.
             const DPR = Math.min(window.devicePixelRatio || 1, isLowPowerDevice() ? 1 : 2);
 
             const resize = () => {
@@ -242,11 +194,6 @@
             };
             resize();
             window.addEventListener('resize', resize);
-
-            // Icon slots. Images are loaded LAZILY (see loadIcons() below) only
-            // when the cloud nears the viewport — saves N network requests on
-            // the initial page load. Site is dark-only, so we fetch just the
-            // white variants (half the requests vs. brand + white).
             const icons = slugs.map(() => ({ img: null }));
 
             let imagesRequested = false;
@@ -262,8 +209,6 @@
                     icons[idx].img = img;
                 });
             };
-
-            // Fibonacci sphere distribution
             const N = icons.length;
             const goldenAngle = Math.PI * (3 - Math.sqrt(5));
             const points = [];
@@ -277,8 +222,6 @@
                     z: Math.sin(theta) * r,
                 });
             }
-
-            // Rotation state
             let rotX = -0.2;
             let rotY = 0;
             let velX = 0;
@@ -316,9 +259,6 @@
             canvas.addEventListener('pointerup', onUp);
             canvas.addEventListener('pointercancel', onUp);
             canvas.addEventListener('pointerleave', () => { dragging = false; });
-
-            // Pause the projection/draw loop when off-screen, AND lazy-load the
-            // icon images the first time the cloud approaches the viewport.
             let cloudVisible = true;
             if ('IntersectionObserver' in window) {
                 cloudVisible = false; // stays paused until first intersection
@@ -332,10 +272,6 @@
             } else {
                 loadIcons(); // no IO support → load immediately
             }
-
-            // Cap the icon sphere to ~30fps — it spins slowly, so the visual
-            // difference vs 60fps is imperceptible but it halves CPU/paint cost
-            // (helps low-resource desktops noticeably).
             const ICON_MIN_FRAME_MS = 33;
             let iconLastFrame = 0;
             const render = (ts) => {
@@ -349,12 +285,9 @@
                 const radius = Math.min(w, h) * 0.42;
                 const cx = w / 2;
                 const cy = h / 2;
-
-                // Physics: decay momentum, then settle into gentle autospin
                 if (!dragging) {
                     velX *= 0.96;
                     velY *= 0.96;
-                    // ease back to baseline horizontal spin after 1.5s idle
                     const idle = performance.now() - interactedAt > 1500;
                     if (idle) {
                         velY += (0.006 - velY) * 0.02;
@@ -363,23 +296,18 @@
                 }
                 rotY += velY;
                 rotX += velX;
-                // Clamp vertical rotation
                 rotX = Math.max(-Math.PI * 0.45, Math.min(Math.PI * 0.45, rotX));
 
                 ctx.clearRect(0, 0, w, h);
 
                 const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
                 const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
-
-                // Project every point with current rotation
                 const projected = new Array(points.length);
                 for (let i = 0; i < points.length; i++) {
                     const p = points[i];
-                    // Rotate around Y axis
                     let x = p.x * cosY + p.z * sinY;
                     let z = -p.x * sinY + p.z * cosY;
                     let y = p.y;
-                    // Then rotate around X axis
                     const y2 = y * cosX - z * sinX;
                     const z2 = y * sinX + z * cosX;
                     projected[i] = {
@@ -389,8 +317,6 @@
                         i: i,
                     };
                 }
-
-                // Painter's algorithm: draw back to front
                 projected.sort((a, b) => a.sz - b.sz);
 
                 const baseSize = Math.max(24, Math.min(w, h) * 0.09);
@@ -408,12 +334,7 @@
                     ctx.drawImage(img, p.sx - size / 2, p.sy - size / 2, size, size);
                 }
                 ctx.globalAlpha = 1;
-                // (rAF chain happens at the top of render now)
             };
-
-            // Kick off the render loop once the first icon has data. `start`
-            // is referenced by loadIcons() (declared above) via hoisting of
-            // this function declaration.
             let started = false;
             function start() {
                 if (started) return;
@@ -423,11 +344,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       6. Glass Buttons & Cards — cursor tracking
-       Updates CSS vars --mx/--my so the radial light sweep
-       follows the pointer.
-       --------------------------------------------------------- */
+    
     function initGlassCursorTracking() {
         const targets = document.querySelectorAll('.glass-button, .project-card');
         targets.forEach((el) => {
@@ -439,11 +356,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       7. Copy-to-clipboard buttons
-       Any button with [data-copy="..."] copies its value and
-       shows a brief "Copiado!" confirmation.
-       --------------------------------------------------------- */
+    
     function initCopyButtons() {
         document.querySelectorAll('[data-copy]').forEach((btn) => {
             btn.addEventListener('click', async () => {
@@ -452,7 +365,6 @@
                 try {
                     await navigator.clipboard.writeText(value);
                 } catch {
-                    // Fallback for older browsers / non-secure contexts
                     const ta = document.createElement('textarea');
                     ta.value = value;
                     ta.style.position = 'fixed';
@@ -475,12 +387,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       8. Projects Horizontal Scroller
-       - Drag to scroll with mouse / pointer
-       - Prev/next nav buttons
-       - Progress dots stay in sync with current centered card
-       --------------------------------------------------------- */
+    
     function initProjectsScroller() {
         const scroller = document.querySelector('[data-projects-scroller]');
         if (!scroller) return;
@@ -491,8 +398,6 @@
         const dots = dotsContainer ? dotsContainer.querySelectorAll('.project-dot') : [];
 
         if (!cards.length) return;
-
-        // ---- helpers ------------------------------------------------
         const cardCenter = (card) => {
             const rect = card.getBoundingClientRect();
             const parentRect = scroller.getBoundingClientRect();
@@ -518,31 +423,24 @@
             const idx = currentIndex();
             dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
         };
-
-        // ---- nav buttons --------------------------------------------
         navButtons.forEach((btn) => {
             btn.addEventListener('click', () => {
                 const dir = btn.dataset.scrollDir === 'next' ? 1 : -1;
                 scrollToIndex(currentIndex() + dir);
             });
         });
-
-        // ---- dots ---------------------------------------------------
         dots.forEach((dot) => {
             dot.addEventListener('click', () => {
                 const idx = parseInt(dot.dataset.scrollTo || '0', 10);
                 scrollToIndex(idx);
             });
         });
-
-        // ---- drag to scroll (pointer) -------------------------------
         let isDown = false;
         let startX = 0;
         let startScroll = 0;
         let moved = false;
 
         scroller.addEventListener('pointerdown', (e) => {
-            // Don't hijack clicks on interactive children
             if (e.target.closest('a, button')) return;
             isDown = true;
             moved = false;
@@ -562,14 +460,11 @@
             isDown = false;
             scroller.classList.remove('is-dragging');
             scroller.releasePointerCapture?.(e.pointerId);
-            // Snap to nearest after drag
             if (moved) scrollToIndex(currentIndex());
         };
         scroller.addEventListener('pointerup', endDrag);
         scroller.addEventListener('pointercancel', endDrag);
         scroller.addEventListener('pointerleave', endDrag);
-
-        // ---- update dots on scroll (debounced via rAF) --------------
         let rafPending = false;
         scroller.addEventListener('scroll', () => {
             if (rafPending) return;
@@ -579,8 +474,6 @@
                 rafPending = false;
             });
         });
-
-        // ---- keyboard arrows when scroller has focus ----------------
         scroller.setAttribute('tabindex', '0');
         scroller.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(currentIndex() + 1); }
@@ -590,17 +483,13 @@
         updateDots();
     }
 
-    /* ---------------------------------------------------------
-       9. Site header — transparent over the dark hero,
-       glass when scrolled past the hero.
-       --------------------------------------------------------- */
+    
     function initHeaderScroll() {
         const header = document.getElementById('site-header');
         const hero   = document.getElementById('hero');
         if (!header || !hero) return;
 
         const update = () => {
-            // Switch to "scrolled" once the hero is mostly out of view
             const heroBottom = hero.getBoundingClientRect().bottom;
             header.classList.toggle('is-scrolled', heroBottom < 80);
         };
@@ -610,11 +499,7 @@
         window.addEventListener('resize', update);
     }
 
-    /* ---------------------------------------------------------
-       10. Nav indicator — pill that slides between the active
-       section's link in the header. Active section is detected
-       via scroll position.
-       --------------------------------------------------------- */
+    
     function initNavIndicator() {
         const nav = document.getElementById('header-nav');
         if (!nav) return;
@@ -640,15 +525,9 @@
             links.forEach((l) => l.classList.toggle('is-active', l === link));
             placeIndicator(link);
         };
-
-        // Click → set active immediately (the section's smooth scroll
-        // will trigger the scroll observer too, which would land on it)
         links.forEach((link) => {
             link.addEventListener('click', () => setActive(link));
         });
-
-        // Scroll-based detection: find which section straddles
-        // ~40% of the viewport from the top.
         const detect = () => {
             const trigger = window.innerHeight * 0.4;
             let current = null;
@@ -673,10 +552,7 @@
         detect();
     }
 
-    /* ---------------------------------------------------------
-       11. Scroll progress — fills the bar under the header
-       proportional to how far the user has scrolled.
-       --------------------------------------------------------- */
+    
     function initScrollProgress() {
         const bar = document.getElementById('header-progress-bar');
         if (!bar) return;
@@ -692,22 +568,13 @@
         window.addEventListener('resize', update);
     }
 
-    /* ---------------------------------------------------------
-       12. Projects backdrop.
-       The animated WebGL nebula (Three.js fbm shader) was retired in
-       favour of a static CSS nebula + starfield (see .projects-section
-       in style.css) for ALL devices. That removes a constant GPU render
-       loop AND the 150KB Three.js dependency — the single biggest perf
-       win for low-resource desktops. We just keep the empty mount hidden.
-       --------------------------------------------------------- */
+    
     function initCelestialSphere() {
         const mount = document.getElementById('celestial-mount');
         if (mount) mount.classList.add('celestial-mount--static');
     }
 
-    /* ---------------------------------------------------------
-       About — Globe (Magic UI Globe via cobe, ESM dynamic import)
-       --------------------------------------------------------- */
+    
     function initAboutGlobe() {
         const canvas = document.querySelector('[data-about-globe]');
         if (!canvas) return;
@@ -718,8 +585,6 @@
 
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const isLowPower = isLowPowerDevice();
-        // Cap DPR at 1 for everyone — the globe is small (in a card), so the
-        // retina sharpness gain wasn't worth ~4× the fragments to shade.
         const dpr = 1;
 
         const sizePx = () => {
@@ -728,8 +593,6 @@
             const m = Math.min(w || Infinity, h || Infinity);
             return Math.max(260, Number.isFinite(m) && m > 0 ? m : 360);
         };
-
-        // Drag-to-rotate
         canvas.addEventListener('pointerdown', (e) => {
             pointerInteracting = e.clientX - pointerOffset;
         });
@@ -747,11 +610,6 @@
                 console.warn('[about-globe] createGlobe is not a function', mod);
                 return;
             }
-
-            // cobe drives its own internal rAF loop with no fps cap, so the
-            // only way to stop the GPU cost when the About section is off-screen
-            // is to destroy the instance and recreate it when it returns.
-            // phi lives in the outer scope, so rotation resumes seamlessly.
             let globe = null;
             const buildGlobe = () => {
                 if (globe) return;
@@ -803,14 +661,7 @@
         });
     }
 
-    /* ---------------------------------------------------------
-       Testimonials — Scroll-pinned stack (scrollytelling)
-       The outer .testimonials-scroll-container is N viewports tall;
-       inside, a position:sticky wrapper pins the visible content.
-       We map the user's scroll progress through the tall container
-       to the active card index, so each viewport of scroll advances
-       one testimonial.
-       --------------------------------------------------------- */
+    
     function initTestimonialStack() {
         const stack = document.querySelector('[data-testimonial-stack]');
         if (!stack) return;
@@ -855,8 +706,6 @@
             });
             dots.forEach((d, i) => d.classList.toggle('is-active', i === activeIndex));
         };
-
-        // Scroll-driven active index
         let rafId = null;
         const onScroll = () => {
             if (rafId !== null || !scrollContainer) return;
@@ -867,7 +716,6 @@
                 if (scrollable <= 0) return;
                 const scrolled = -rect.top;
                 const progress = Math.max(0, Math.min(1, scrolled / scrollable));
-                // progress 0..1 → index 0..total-1. Math.min handles the inclusive 1.0 case.
                 const newIndex = Math.min(total - 1, Math.floor(progress * total));
                 if (newIndex !== activeIndex) {
                     activeIndex = newIndex;
@@ -881,8 +729,6 @@
             window.addEventListener('resize', onScroll, { passive: true });
             onScroll();
         }
-
-        // Dots scroll the page to the middle of the corresponding card range.
         dots.forEach((dot, i) => {
             dot.addEventListener('click', () => {
                 if (!scrollContainer) {
@@ -899,8 +745,6 @@
                 });
             });
         });
-
-        // First-time fade/slide-in of the pinned wrapper
         if (section) {
             if (reducedMotion || !('IntersectionObserver' in window)) {
                 section.classList.add('is-in-view');
@@ -920,11 +764,8 @@
         render();
     }
 
-    /* ---------------------------------------------------------
-       Boot
-       --------------------------------------------------------- */
+    
     const boot = () => {
-        // Theme is locked to dark — no toggler to init.
         initMorphingText();
         initScrollVelocity();
         initDiaTextReveal();
